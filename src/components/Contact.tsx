@@ -34,18 +34,18 @@ export default function Contact() {
             <a
               id="contact-phone"
               href={`tel:${CONTACT.phone.replace(/\s/g, '')}`}
-              className="group glass rounded-3xl p-6 flex items-center gap-5 hover:bg-white/10 transition-all duration-300 hover:-translate-y-0.5"
+              className="group glass rounded-2xl sm:rounded-3xl p-4 sm:p-6 flex items-center gap-3.5 sm:gap-5 hover:bg-white/10 transition-all duration-300 hover:-translate-y-0.5"
             >
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500/20 to-red-500/20 flex items-center justify-center text-orange-400 group-hover:from-orange-500/30 group-hover:to-red-500/30 transition-all duration-300 shrink-0">
-                <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 20 20">
+              <div className="w-11 h-11 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br from-orange-500/20 to-red-500/20 flex items-center justify-center text-orange-400 group-hover:from-orange-500/30 group-hover:to-red-500/30 transition-all duration-300 shrink-0">
+                <svg className="w-5 h-5 sm:w-7 sm:h-7" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                 </svg>
               </div>
-              <div>
-                <div className="text-white/40 text-sm mb-1">Zavolajte nám</div>
-                <div className="text-white font-semibold text-xl">{CONTACT.phone}</div>
+              <div className="min-w-0 flex-1">
+                <div className="text-white/40 text-xs sm:text-sm mb-0.5 sm:mb-1">Zavolajte nám</div>
+                <div className="text-white font-semibold text-base sm:text-xl truncate">{CONTACT.phone}</div>
               </div>
-              <svg className="w-5 h-5 text-white/20 ml-auto group-hover:text-orange-400 group-hover:translate-x-1 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <svg className="w-5 h-5 text-white/20 ml-auto shrink-0 group-hover:text-orange-400 group-hover:translate-x-1 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
               </svg>
             </a>
@@ -54,34 +54,34 @@ export default function Contact() {
             <a
               id="contact-email"
               href={`mailto:${CONTACT.email}`}
-              className="group glass rounded-3xl p-6 flex items-center gap-5 hover:bg-white/10 transition-all duration-300 hover:-translate-y-0.5"
+              className="group glass rounded-2xl sm:rounded-3xl p-4 sm:p-6 flex items-center gap-3.5 sm:gap-5 hover:bg-white/10 transition-all duration-300 hover:-translate-y-0.5"
             >
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500/20 to-indigo-500/20 flex items-center justify-center text-blue-400 group-hover:from-blue-500/30 group-hover:to-indigo-500/30 transition-all duration-300 shrink-0">
-                <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 20 20">
+              <div className="w-11 h-11 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br from-blue-500/20 to-indigo-500/20 flex items-center justify-center text-blue-400 group-hover:from-blue-500/30 group-hover:to-indigo-500/30 transition-all duration-300 shrink-0">
+                <svg className="w-5 h-5 sm:w-7 sm:h-7" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                   <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                 </svg>
               </div>
-              <div>
-                <div className="text-white/40 text-sm mb-1">Napíšte nám</div>
-                <div className="text-white font-semibold text-lg">{CONTACT.email}</div>
+              <div className="min-w-0 flex-1">
+                <div className="text-white/40 text-xs sm:text-sm mb-0.5 sm:mb-1">Napíšte nám</div>
+                <div className="text-white font-semibold text-xs xs:text-sm sm:text-lg truncate">{CONTACT.email}</div>
               </div>
-              <svg className="w-5 h-5 text-white/20 ml-auto group-hover:text-blue-400 group-hover:translate-x-1 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <svg className="w-5 h-5 text-white/20 ml-auto shrink-0 group-hover:text-blue-400 group-hover:translate-x-1 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
               </svg>
             </a>
 
             {/* Address */}
-            <div className="glass rounded-3xl p-6 flex items-center gap-5">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500/20 to-emerald-500/20 flex items-center justify-center text-green-400 shrink-0">
-                <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 20 20">
+            <div className="glass rounded-2xl sm:rounded-3xl p-4 sm:p-6 flex items-center gap-3.5 sm:gap-5">
+              <div className="w-11 h-11 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br from-green-500/20 to-emerald-500/20 flex items-center justify-center text-green-400 shrink-0">
+                <svg className="w-5 h-5 sm:w-7 sm:h-7" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                 </svg>
               </div>
-              <div>
-                <div className="text-white/40 text-sm mb-1">Nájdete nás</div>
-                <div className="text-white font-semibold">{CONTACT.address}</div>
-                <div className="text-white/60 text-sm">{CONTACT.city}, {CONTACT.country}</div>
+              <div className="min-w-0 flex-1">
+                <div className="text-white/40 text-xs sm:text-sm mb-0.5 sm:mb-1">Nájdete nás</div>
+                <div className="text-white font-semibold text-sm sm:text-base truncate">{CONTACT.address}</div>
+                <div className="text-white/60 text-xs sm:text-sm truncate">{CONTACT.city}, {CONTACT.country}</div>
               </div>
             </div>
 
