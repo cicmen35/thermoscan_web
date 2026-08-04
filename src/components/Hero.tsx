@@ -47,7 +47,7 @@ export default function Hero() {
           </p>
 
           {/* CTAs */}
-          <div className="flex flex-wrap items-center gap-4 mt-2">
+          <div className="flex flex-wrap items-center justify-center gap-4 mt-2">
             <a
               id="hero-contact-cta"
               href="#kontakt"
@@ -65,7 +65,7 @@ export default function Hero() {
           </div>
 
           {/* Quick stats */}
-          <div className="flex flex-wrap gap-8 mt-4 pt-6 border-t border-white/10">
+          <div className="hidden sm:flex flex-wrap gap-8 mt-4 pt-6 border-t border-white/10">
             {[
               { value: '1–2h', label: 'Trvanie merania' },
               { value: '10°C', label: 'Min. rozdiel teplôt' },
