@@ -28,7 +28,7 @@ export default function Contact() {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8">
-          {/* Contact info cards */}
+          {/* Left: Contact info + process steps */}
           <div className="flex flex-col gap-4">
             {/* Phone */}
             <a
@@ -81,9 +81,7 @@ export default function Contact() {
               <div>
                 <div className="text-white/40 text-sm mb-1">Nájdete nás</div>
                 <div className="text-white font-semibold">{CONTACT.address}</div>
-                <div className="text-white/60 text-sm">
-                  {CONTACT.city}, {CONTACT.country}
-                </div>
+                <div className="text-white/60 text-sm">{CONTACT.city}, {CONTACT.country}</div>
               </div>
             </div>
 
@@ -108,47 +106,121 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* Right: CTA card */}
-          <div className="flex flex-col gap-4">
-            <div className="glass rounded-3xl p-8 md:p-10 flex flex-col gap-6 h-full">
-              <div className="flex flex-col gap-2">
-                <h3 className="font-display font-bold text-2xl text-white">
-                  Získajte nezáväznú cenovú ponuku
-                </h3>
-                <p className="text-white/50 text-sm leading-relaxed">
-                  Stačí nám napísať základné informácie o objekte (veľkosť, lokalita, typ
-                  stavby) a my vám obratom zašleme nezáväznú cenovú ponuku.
-                </p>
-              </div>
-
-              {/* CTA buttons */}
-              <div className="flex flex-col gap-3 mt-auto">
-                <a
-                  id="contact-call-cta"
-                  href={`tel:${CONTACT.phone.replace(/\s/g, '')}`}
-                  className="flex items-center justify-center gap-3 py-4 rounded-2xl bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold text-base hover:opacity-90 hover:scale-[1.02] transition-all duration-200 shadow-xl shadow-orange-900/40"
-                >
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                  </svg>
-                  Zavolajte: {CONTACT.phone}
-                </a>
-                <a
-                  id="contact-email-cta"
-                  href={`mailto:${CONTACT.email}`}
-                  className="flex items-center justify-center gap-3 py-4 rounded-2xl glass text-white font-semibold text-base hover:bg-white/15 transition-all duration-200"
-                >
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                  </svg>
-                  Napíšte: {CONTACT.email}
-                </a>
-              </div>
-            </div>
+          {/* Right: Contact form */}
+          <div className="flex flex-col">
+            <ContactForm />
           </div>
         </div>
       </div>
     </section>
+  );
+}
+
+// ─── Form ────────────────────────────────────────────────────────────────────
+
+function ContactForm() {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
+    const body =
+      `Meno: ${data.get('firstName')} ${data.get('lastName')}\n` +
+      `Email: ${data.get('email')}\n` +
+      `Telefón: ${data.get('phone') || '—'}\n` +
+      `Typ objektu: ${data.get('propertyType')}\n` +
+      `Lokalita: ${data.get('location')}\n\n` +
+      `Správa:\n${data.get('message') || '—'}`;
+    window.location.href =
+      `mailto:${CONTACT.email}` +
+      `?subject=${encodeURIComponent('Dopyt – ' + data.get('propertyType'))}` +
+      `&body=${encodeURIComponent(body)}`;
+  }
+
+  const input =
+    'w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm ' +
+    'placeholder:text-white/30 focus:outline-none focus:border-orange-500/60 transition-all duration-200';
+  const label = 'block text-white/50 text-xs font-medium mb-1.5 uppercase tracking-wide';
+
+  return (
+    <form
+      id="contact-form"
+      onSubmit={handleSubmit}
+      noValidate
+      className="glass rounded-3xl p-8 flex flex-col gap-5 h-full"
+    >
+      <div>
+        <h3 className="font-display font-bold text-2xl text-white">Získajte cenovú ponuku</h3>
+        <p className="text-white/40 text-sm mt-1">Odpovieme do 1 pracovného dňa.</p>
+      </div>
+
+      {/* First + last name */}
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <label htmlFor="firstName" className={label}>Meno *</label>
+          <input id="firstName" name="firstName" type="text" required minLength={2}
+            autoComplete="given-name" placeholder="Ján" className={input} />
+        </div>
+        <div>
+          <label htmlFor="lastName" className={label}>Priezvisko *</label>
+          <input id="lastName" name="lastName" type="text" required minLength={2}
+            autoComplete="family-name" placeholder="Novák" className={input} />
+        </div>
+      </div>
+
+      {/* Email */}
+      <div>
+        <label htmlFor="contactEmail" className={label}>E-mail *</label>
+        <input id="contactEmail" name="email" type="email" required
+          autoComplete="email" placeholder="jan.novak@email.sk" className={input} />
+      </div>
+
+      {/* Phone */}
+      <div>
+        <label htmlFor="contactPhone" className={label}>Telefón</label>
+        <input id="contactPhone" name="phone" type="tel"
+          autoComplete="tel" placeholder="+421 9XX XXX XXX" className={input} />
+      </div>
+
+      {/* Property type + location */}
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <label htmlFor="propertyType" className={label}>Typ objektu *</label>
+          <select id="propertyType" name="propertyType" required defaultValue=""
+            className={`${input} appearance-none cursor-pointer`}>
+            <option value="" disabled>Vybrať…</option>
+            <option>Rodinný dom</option>
+            <option>Bytový dom</option>
+            <option>Byt</option>
+            <option>Kancelárske priestory</option>
+            <option>Novostavba</option>
+            <option>Iné</option>
+          </select>
+        </div>
+        <div>
+          <label htmlFor="location" className={label}>Lokalita *</label>
+          <input id="location" name="location" type="text" required
+            placeholder="Nitra, Bratislava…" className={input} />
+        </div>
+      </div>
+
+      {/* Message */}
+      <div>
+        <label htmlFor="message" className={label}>Správa</label>
+        <textarea id="message" name="message" rows={3}
+          placeholder="Veľkosť objektu, ďalšie informácie…"
+          className={`${input} resize-none`} />
+      </div>
+
+      <button
+        id="contact-form-submit"
+        type="submit"
+        className="mt-auto w-full py-4 rounded-2xl bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold text-base hover:opacity-90 hover:scale-[1.02] active:scale-100 transition-all duration-200 shadow-xl shadow-orange-900/40"
+      >
+        Odoslať dopyt
+      </button>
+
+      <p className="text-white/25 text-xs text-center -mt-2">
+        * Povinné polia. Formulár otvorí váš e-mailový klient.
+      </p>
+    </form>
   );
 }
