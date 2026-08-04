@@ -15,7 +15,7 @@ export default function Gallery() {
           </div>
           <h2 className="font-display font-bold text-4xl md:text-5xl text-white">
             Ukážka{' '}
-            <span className="text-gradient">príkladov</span>
+            <span className="text-gradient">snímkov</span>
           </h2>
           <p className="text-white/60 max-w-xl text-base leading-relaxed">
             Ukážka príkladov termovíznych snímkov z obhliadok.
