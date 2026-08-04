@@ -80,13 +80,7 @@ export default function Services() {
                 Je využiteľné ako pri novostavbách v rámci kontroly kvality prevedených prác,
                 tak rekonštrukciách budov, kde slúži na diagnostikovanie problematických častí v budove.
               </p>
-              <a
-                href="#kontakt"
-                id="services-contact-cta"
-                className="self-start mt-2 px-6 py-3 rounded-full bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold text-sm hover:opacity-90 hover:scale-105 transition-all duration-200 shadow-lg shadow-orange-900/40"
-              >
-                Kontakt
-              </a>
+
             </div>
 
             {/* Temperature scale visual */}
@@ -96,16 +90,26 @@ export default function Services() {
                 <span>Teplé</span>
               </div>
               <div className="h-4 rounded-full bg-gradient-to-r from-blue-600 via-green-400 via-yellow-400 to-red-500 shadow-lg" />
-              <div className="grid grid-cols-3 gap-4 mt-2">
+              <div className="flex flex-col gap-2 sm:hidden">
+                {[
+                  { dot: 'bg-blue-500', label: 'Tepelné úniky', desc: 'Modré oblasti = studené miesta' },
+                  { dot: 'bg-yellow-400', label: 'Prechodné zóny', desc: 'Oblasti s miernymi stratami' },
+                  { dot: 'bg-red-500', label: 'Tepelné mosty', desc: 'Červené = problémové miesta' },
+                ].map((item) => (
+                  <div key={item.label} className="flex items-center gap-3">
+                    <span className={`w-2.5 h-2.5 rounded-full shrink-0 ${item.dot}`} />
+                    <span className="text-white/70 text-sm font-medium">{item.label}</span>
+                    <span className="text-white/40 text-xs ml-auto">{item.desc}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="hidden sm:grid grid-cols-3 gap-4 mt-2">
                 {[
                   { color: 'from-blue-600/20 to-blue-600/10 border-blue-500/30 text-blue-400', label: 'Tepelné úniky', desc: 'Modré oblasti = studené miesta' },
                   { color: 'from-yellow-500/20 to-yellow-500/10 border-yellow-500/30 text-yellow-400', label: 'Prechodné zóny', desc: 'Oblasti s miernymi stratami' },
                   { color: 'from-red-600/20 to-red-600/10 border-red-500/30 text-red-400', label: 'Tepelné mosty', desc: 'Červené = problémové miesta' },
                 ].map((item) => (
-                  <div
-                    key={item.label}
-                    className={`rounded-2xl p-4 bg-gradient-to-br ${item.color} border`}
-                  >
+                  <div key={item.label} className={`rounded-2xl p-4 bg-gradient-to-br ${item.color} border`}>
                     <div className={`font-semibold text-sm mb-1 ${item.color.split(' ').find(c => c.startsWith('text-'))}`}>
                       {item.label}
                     </div>
