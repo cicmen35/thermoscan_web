@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/30 pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-6">
-        <div className="grid md:grid-cols-3 gap-10 mb-10">
+        <div className="grid md:grid-cols-4 gap-10 mb-10">
           {/* Brand */}
           <div className="flex flex-col gap-4">
             <img
@@ -61,6 +61,23 @@ export default function Footer() {
               <span className="text-white/40">
                 {CONTACT.address}, {CONTACT.city}
               </span>
+            </div>
+          </div>
+
+          {/* Map */}
+          <div className="flex flex-col gap-4">
+            <h4 className="text-white/60 text-xs font-semibold uppercase tracking-wider">Kde nás nájdete</h4>
+            <div className="rounded-xl overflow-hidden border border-white/10 w-full aspect-square">
+              <iframe
+                title="ThermoScan – Pod zlatým brehom 59, Nitra"
+                src="https://www.google.com/maps?q=Pod+zlatým+brehom+59,+94901+Nitra,+Slovensko&output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0, display: 'block' }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
             </div>
           </div>
         </div>
