@@ -3,22 +3,32 @@ import { NAV_LINKS, CONTACT, LOGO_URL } from '../data/content';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    let lastY = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 40);
+      setHidden(y > lastY && y > 80);
+      lastY = y;
+    };
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'glass shadow-lg shadow-black/20 py-2' : 'bg-transparent py-4'
-        }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        hidden ? '-translate-y-full' : 'translate-y-0'
+      } ${
+        scrolled ? 'glass shadow-lg shadow-black/20 py-2' : 'bg-transparent py-4'
+      }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between gap-8">
         {/* Logo */}
-        <a href="#domov" className="flex items-center gap-2 shrink-0">
+        <a href="/" className="flex items-center gap-2 shrink-0">
           <img
             src={LOGO_URL}
             alt="ThermoScan Logo"
