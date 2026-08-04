@@ -27,7 +27,7 @@ export default function Hero() {
       />
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 pt-28 pb-20 flex flex-col items-center text-center gap-6">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 pt-24 pb-32 sm:pt-28 sm:pb-24 flex flex-col items-center text-center gap-6">
         <div className="flex flex-col gap-6 items-center">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-orange-300 text-sm font-medium">
@@ -36,12 +36,12 @@ export default function Hero() {
           </div>
 
           {/* Heading */}
-          <h1 className="font-display font-bold text-5xl md:text-6xl lg:text-7xl leading-tight text-white">
+          <h1 className="font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight text-white">
             Termovízia{' '}
             <span className="text-gradient">budov</span>
           </h1>
 
-          <p className="text-lg text-white/70 leading-relaxed max-w-2xl">
+          <p className="text-base sm:text-lg text-white/70 leading-relaxed max-w-2xl">
             Meranie termovíznou kamerou patrí k vysoko efektívnym nedeštruktívnym metódam merania,
             ktorým dokážeme odhaliť skryté nedostatky v obalových konštrukciách budov.
           </p>
@@ -84,7 +84,7 @@ export default function Hero() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/30 text-xs">
+      <div className="flex absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2 text-white/30 text-xs">
         <span>Scroll</span>
         <div className="w-px h-10 bg-gradient-to-b from-white/30 to-transparent animate-bounce" />
       </div>
