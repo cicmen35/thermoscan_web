@@ -28,9 +28,8 @@ export default function Gallery() {
             <div
               key={i}
               id={`gallery-img-${i}`}
-              className={`group relative overflow-hidden rounded-2xl cursor-pointer ${
-                i === 0 ? 'md:col-span-2 md:row-span-2' : ''
-              }`}
+              className={`group relative overflow-hidden rounded-2xl cursor-pointer ${i === 0 ? 'md:col-span-2 md:row-span-2' : ''
+                }`}
               style={{ aspectRatio: i === 0 ? '16/10' : '4/3' }}
             >
               <img
