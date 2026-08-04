@@ -30,8 +30,8 @@ export default function WhyUs() {
       <div className="relative max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left: Text content */}
-          <div className="flex flex-col gap-6">
-            <div className="inline-flex self-start items-center gap-2 px-4 py-1.5 rounded-full glass text-orange-300 text-sm font-medium">
+          <div className="flex flex-col gap-6 items-center text-center lg:items-start lg:text-left">
+            <div className="inline-flex self-center lg:self-start items-center gap-2 px-4 py-1.5 rounded-full glass text-orange-300 text-sm font-medium">
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
               </svg>
@@ -39,8 +39,8 @@ export default function WhyUs() {
             </div>
 
             <h2 className="font-display font-bold text-4xl md:text-5xl text-white leading-tight">
-              Presnosť, spoľahlivosť{' '}
-              <span className="text-gradient-warm">a ľudský prístup</span>
+              Termovízna diagnostika{' '}
+              <span className="text-gradient-warm">na profesionálnej úrovni</span>
             </h2>
 
             <p className="text-white/60 leading-relaxed text-base">{WHY_US_TEXT}</p>
@@ -48,25 +48,25 @@ export default function WhyUs() {
             <a
               id="whyus-contact-cta"
               href="#kontakt"
-              className="self-start mt-2 px-8 py-4 rounded-full bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold hover:opacity-90 hover:scale-105 transition-all duration-200 shadow-xl shadow-orange-900/40"
+              className="self-center lg:self-start mt-2 px-8 py-4 rounded-full bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold hover:opacity-90 hover:scale-105 transition-all duration-200 shadow-xl shadow-orange-900/40"
             >
               Získať cenovú ponuku
             </a>
           </div>
 
           {/* Right: Feature cards */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4">
             {WHY_US_POINTS.map((point, i) => (
               <div
                 key={point.label}
                 id={`whyus-point-${i}`}
-                className="group glass rounded-3xl p-6 flex flex-col gap-3 hover:bg-white/10 transition-all duration-300 hover:-translate-y-1"
+                className="group glass rounded-2xl sm:rounded-3xl p-4 sm:p-6 flex flex-col gap-2.5 sm:gap-3 hover:bg-white/10 transition-all duration-300 hover:-translate-y-1"
               >
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-orange-500/20 to-red-500/20 flex items-center justify-center text-orange-400 group-hover:from-orange-500/30 group-hover:to-red-500/30 transition-all duration-300">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-br from-orange-500/20 to-red-500/20 flex items-center justify-center text-orange-400 group-hover:from-orange-500/30 group-hover:to-red-500/30 transition-all duration-300 shrink-0">
                   {icons[i]}
                 </div>
-                <h3 className="font-display font-bold text-white text-lg">{point.label}</h3>
-                <p className="text-white/50 text-sm leading-relaxed">{point.desc}</p>
+                <h3 className="font-display font-bold text-white text-base sm:text-lg">{point.label}</h3>
+                <p className="text-white/50 text-xs sm:text-sm leading-relaxed">{point.desc}</p>
               </div>
             ))}
           </div>

@@ -73,7 +73,7 @@ export const FAQ = [
 ];
 
 export const WHY_US_TEXT =
-  'Naše termovízne merania vám pomôžu odhaliť tepelné úniky, ktoré zvyšujú náklady na energie a znižujú komfort bývania. Pracujeme s profesionálnou technikou, výsledky podrobne vyhodnocujeme a všetko vám zrozumiteľne vysvetlíme. Ku každému objektu pristupujeme individuálne – naším cieľom nie je len urobiť meranie, ale pomôcť vám nájsť reálne úspory a zvýšiť kvalitu bývania. Spoľahnite sa na presnosť, spoľahlivosť a ľudský prístup.';
+  'Naše termovízne merania vám pomôžu odhaliť tepelné úniky, ktoré zvyšujú náklady na energie a znižujú komfort bývania. Pracujeme s profesionálnou technikou, výsledky podrobne vyhodnocujeme a všetko vám zrozumiteľne vysvetlíme. Ku každému objektu pristupujeme individuálne – naším cieľom nie je len urobiť meranie, ale pomôcť vám nájsť reálne úspory a zvýšiť kvalitu bývania.';
 
 export const WHY_US_POINTS = [
   { label: 'Presnosť', desc: 'Profesionálna termokamera s vysokým rozlíšením' },
