@@ -13,9 +13,8 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? 'glass shadow-lg shadow-black/20 py-2' : 'bg-transparent py-4'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'glass shadow-lg shadow-black/20 py-2' : 'bg-transparent py-4'
+        }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between gap-8">
         {/* Logo */}
@@ -23,7 +22,7 @@ export default function Navbar() {
           <img
             src={LOGO_URL}
             alt="ThermoScan Logo"
-            className="h-10 w-auto object-contain brightness-0 invert"
+            className="h-10 w-auto object-contain drop-shadow-md"
             loading="eager"
           />
         </a>
@@ -76,9 +75,8 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       <div
-        className={`md:hidden overflow-hidden transition-all duration-300 ${
-          menuOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
-        }`}
+        className={`md:hidden overflow-hidden transition-all duration-300 ${menuOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
+          }`}
       >
         <div className="glass-dark mx-4 mt-2 rounded-2xl p-4 flex flex-col gap-2">
           {NAV_LINKS.map((link) => (

@@ -14,7 +14,7 @@ export default function Footer() {
             <img
               src={LOGO_URL}
               alt="ThermoScan Logo"
-              className="h-10 w-auto object-contain brightness-0 invert opacity-80"
+              className="h-10 w-auto object-contain drop-shadow-md opacity-90"
             />
             <p className="text-white/40 text-sm leading-relaxed max-w-xs">
               Profesionálne termovízne merania budov pre rodinné domy, bytové domy, kancelárske

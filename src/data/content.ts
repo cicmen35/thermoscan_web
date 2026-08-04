@@ -1,7 +1,7 @@
 // Static asset imports – all images served from local /src/assets/
-import logoImg from '../assets/logo.jpg';
-import heroBgImg from '../assets/hero.png';
-import faviconImg from '../assets/favicon.jpg';
+import logoImg from '../assets/thermoscan-logo.svg';
+import heroBgImg from '../assets/stock_thermovision_2.jpg';
+import faviconImg from '../assets/favicon.svg';
 
 import gallery1 from '../assets/defekty-paneloveho-domu_IRVIS-300x184.jpg';
 import gallery2 from '../assets/nezatepleny_zatepleny-panelak_IR-1-300x184.jpg';
