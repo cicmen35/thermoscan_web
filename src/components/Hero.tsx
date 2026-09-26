@@ -20,18 +20,18 @@ export default function Hero() {
       </div>
 
       {/* Animated glow orbs */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl animate-pulse pointer-events-none" />
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse pointer-events-none" />
       <div
-        className="absolute bottom-1/4 right-1/3 w-72 h-72 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"
+        className="absolute bottom-1/4 right-1/3 w-72 h-72 bg-accent/10 rounded-full blur-3xl pointer-events-none"
         style={{ animation: 'pulse 3s ease-in-out 1s infinite' }}
       />
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 pt-24 pb-32 sm:pt-28 sm:pb-24 flex flex-col items-center text-center gap-6">
+      <div className="hero-content relative z-10 max-w-7xl mx-auto px-6 pt-24 pb-32 sm:pt-28 sm:pb-24 flex flex-col items-center text-center gap-6">
         <div className="flex flex-col gap-6 items-center">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-orange-300 text-sm font-medium">
-            <span className="w-2 h-2 rounded-full bg-orange-400 animate-pulse" />
+          <div className="badge badge-outline text-primary border-primary/30 bg-primary/10 gap-2 px-4 py-3 text-sm font-medium rounded-full">
+            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
             Odborné posúdenie stavu nehnuteľnosti
           </div>
 
@@ -41,7 +41,7 @@ export default function Hero() {
             <span className="text-gradient">budov</span>
           </h1>
 
-          <p className="text-base sm:text-lg text-white/70 leading-relaxed max-w-2xl">
+          <p className="text-base sm:text-lg text-base-content/70 leading-relaxed max-w-2xl">
             Meranie termovíznou kamerou patrí k vysoko efektívnym nedeštruktívnym metódam merania,
             ktorým dokážeme odhaliť skryté nedostatky v obalových konštrukciách budov.
           </p>
@@ -51,36 +51,35 @@ export default function Hero() {
             <a
               id="hero-contact-cta"
               href="#kontakt"
-              className="px-8 py-4 rounded-full bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold text-base hover:opacity-90 hover:scale-105 transition-all duration-200 shadow-xl shadow-orange-900/50"
+              className="btn btn-primary btn-lg rounded-full shadow-xl shadow-orange-900/50 hover:scale-105 transition-transform"
             >
               Kontaktujte nás
             </a>
             <a
               id="hero-learn-more"
               href="#termovizia"
-              className="px-8 py-4 rounded-full glass text-white font-semibold text-base hover:bg-white/15 transition-all duration-200"
+              className="btn btn-ghost btn-lg rounded-full glass text-white hover:bg-white/15"
             >
               Zistiť viac
             </a>
           </div>
 
           {/* Quick stats */}
-          <div className="hidden sm:flex flex-wrap gap-8 mt-4 pt-6 border-t border-white/10">
+          <div className="stats stats-horizontal hidden sm:flex bg-transparent border-t border-white/10 shadow-none mt-4 pt-2">
             {[
               { value: '1–2h', label: 'Trvanie merania' },
               { value: '10°C', label: 'Min. rozdiel teplôt' },
               { value: '1–2 dni', label: 'Dodanie správy' },
             ].map((stat) => (
-              <div key={stat.label} className="flex flex-col gap-0.5">
-                <span className="text-2xl font-bold text-gradient-warm font-display">
+              <div key={stat.label} className="stat px-6 py-0">
+                <div className="stat-value text-2xl font-bold text-gradient-warm font-display">
                   {stat.value}
-                </span>
-                <span className="text-xs text-white/50">{stat.label}</span>
+                </div>
+                <div className="stat-desc text-white/50">{stat.label}</div>
               </div>
             ))}
           </div>
         </div>
-
       </div>
 
       {/* Scroll indicator */}

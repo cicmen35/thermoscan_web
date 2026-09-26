@@ -1,4 +1,47 @@
 @import "tailwindcss";
+@plugin "daisyui" {
+  themes: thermoscan --default;
+}
+
+@plugin "daisyui/theme" {
+  name: "thermoscan";
+  default: true;
+  color-scheme: dark;
+
+  --color-base-100: oklch(10% 0.02 230);
+  --color-base-200: oklch(13% 0.025 230);
+  --color-base-300: oklch(17% 0.03 230);
+  --color-base-content: oklch(92% 0.01 230);
+
+  --color-primary: oklch(72% 0.22 45);
+  --color-primary-content: oklch(10% 0.02 45);
+
+  --color-secondary: oklch(60% 0.22 25);
+  --color-secondary-content: oklch(10% 0.02 25);
+
+  --color-accent: oklch(67% 0.17 230);
+  --color-accent-content: oklch(10% 0.02 230);
+
+  --color-neutral: oklch(22% 0.05 230);
+  --color-neutral-content: oklch(80% 0.02 230);
+
+  --color-info: oklch(65% 0.18 235);
+  --color-info-content: oklch(10% 0.02 235);
+
+  --color-success: oklch(65% 0.18 145);
+  --color-success-content: oklch(10% 0.02 145);
+
+  --color-warning: oklch(75% 0.18 60);
+  --color-warning-content: oklch(10% 0.02 60);
+
+  --color-error: oklch(60% 0.22 25);
+  --color-error-content: oklch(10% 0.02 25);
+
+  --radius-selector: 2rem;
+  --radius-field: 0.75rem;
+  --radius-box: 1rem;
+  --border: 1px;
+}
 
 @theme {
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
