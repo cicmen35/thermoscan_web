@@ -117,4 +117,127 @@
   .section-blur-bg {
     background: radial-gradient(ellipse 80% 60% at 50% 50%, oklch(38% 0.18 230 / 18%), transparent);
   }
+
+  /* Hero Animations & Transitions */
+  @keyframes heroFadeInDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-24px) scale(0.96);
+      filter: blur(6px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+  }
+
+  @keyframes heroFadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(32px);
+      filter: blur(8px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+  }
+
+
+  @keyframes gradientFlow {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  @keyframes floatOrb1 {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(35px, -25px) scale(1.1);
+    }
+  }
+
+  @keyframes floatOrb2 {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(-30px, 20px) scale(0.92);
+    }
+  }
+
+  @keyframes buttonHeatGlow {
+    0%, 100% {
+      box-shadow: 0 10px 25px -4px oklch(72% 0.22 45 / 35%);
+    }
+    50% {
+      box-shadow: 0 16px 36px 0px oklch(72% 0.22 45 / 60%);
+    }
+  }
+
+  .animate-hero-badge {
+    animation: heroFadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .animate-hero-title {
+    animation: heroFadeInUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+  }
+
+  .animate-hero-desc {
+    animation: heroFadeInUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.32s both;
+  }
+
+  .animate-hero-cta {
+    animation: heroFadeInUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.48s both;
+  }
+
+  .animate-hero-stats {
+    animation: heroFadeInUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.64s both;
+  }
+
+
+
+  .animate-gradient-pan {
+    background-size: 200% 200%;
+    animation: gradientFlow 4.5s ease infinite;
+  }
+
+  .animate-float-orb-1 {
+    animation: floatOrb1 10s ease-in-out infinite;
+  }
+
+  .animate-float-orb-2 {
+    animation: floatOrb2 12s ease-in-out infinite;
+  }
+
+  .animate-button-heat {
+    animation: buttonHeatGlow 3s ease-in-out infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-badge,
+  .animate-hero-title,
+  .animate-hero-desc,
+  .animate-hero-cta,
+  .animate-hero-stats,
+  .animate-gradient-pan,
+  .animate-float-orb-1,
+  .animate-float-orb-2,
+  .animate-button-heat {
+    animation: none !important;
+    transform: none !important;
+    filter: none !important;
+    opacity: 1 !important;
+  }
 }

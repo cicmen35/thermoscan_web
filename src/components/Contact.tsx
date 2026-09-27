@@ -21,9 +21,9 @@ export default function Contact() {
             <span className="text-gradient">kontaktovať</span>
           </h2>
           <p className="text-base-content/60 max-w-2xl text-base leading-relaxed">
-            Po telefonickom dohovore pre Vás pripravíme cenovú ponuku. Následne po jej
-            odsúhlasení si dohodneme termín a vykonáme obhliadku. Vypracujeme protokol o
-            termovíznom meraní, ktorý po uhradení dohodnutej ceny odovzdáme.
+            Na základe Vášho dopytu pre Vás pripravíme
+            cenovú ponuku. Následne po jej odsúhlasení si dohodneme termín a vykonáme obhliadku.
+            Vypracujeme protokol o termovíznom meraní, ktorý po uhradení dohodnutej ceny odovzdáme.
           </p>
         </div>
 
@@ -31,13 +31,12 @@ export default function Contact() {
           {/* Left: Contact info + process steps */}
           <div className="flex flex-col gap-4">
             {/* Phone */}
-            <a
+            <div
               id="contact-phone"
-              href={`tel:${CONTACT.phone.replace(/\s/g, '')}`}
-              className="card glass hover:bg-white/10 transition-all duration-300 hover:-translate-y-0.5 group"
+              className="card glass"
             >
               <div className="card-body flex-row items-center gap-3.5 sm:gap-5 p-4 sm:p-6">
-                <div className="w-11 h-11 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center text-primary group-hover:from-primary/30 group-hover:to-secondary/30 transition-all duration-300 shrink-0">
+                <div className="w-11 h-11 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center text-primary shrink-0">
                   <svg className="w-5 h-5 sm:w-7 sm:h-7" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                   </svg>
@@ -46,20 +45,16 @@ export default function Contact() {
                   <div className="text-base-content/40 text-xs sm:text-sm mb-0.5 sm:mb-1">Zavolajte nám</div>
                   <div className="text-white font-semibold text-base sm:text-xl truncate">{CONTACT.phone}</div>
                 </div>
-                <svg className="w-5 h-5 text-white/20 ml-auto shrink-0 group-hover:text-primary group-hover:translate-x-1 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                </svg>
               </div>
-            </a>
+            </div>
 
             {/* Email */}
-            <a
+            <div
               id="contact-email"
-              href={`mailto:${CONTACT.email}`}
-              className="card glass hover:bg-white/10 transition-all duration-300 hover:-translate-y-0.5 group"
+              className="card glass"
             >
               <div className="card-body flex-row items-center gap-3.5 sm:gap-5 p-4 sm:p-6">
-                <div className="w-11 h-11 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br from-info/20 to-accent/20 flex items-center justify-center text-info group-hover:from-info/30 group-hover:to-accent/30 transition-all duration-300 shrink-0">
+                <div className="w-11 h-11 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br from-info/20 to-accent/20 flex items-center justify-center text-info shrink-0">
                   <svg className="w-5 h-5 sm:w-7 sm:h-7" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                     <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
@@ -69,11 +64,8 @@ export default function Contact() {
                   <div className="text-base-content/40 text-xs sm:text-sm mb-0.5 sm:mb-1">Napíšte nám</div>
                   <div className="text-white font-semibold text-xs xs:text-sm sm:text-lg truncate">{CONTACT.email}</div>
                 </div>
-                <svg className="w-5 h-5 text-white/20 ml-auto shrink-0 group-hover:text-info group-hover:translate-x-1 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                </svg>
               </div>
-            </a>
+            </div>
 
             {/* Address */}
             <div className="card glass">
@@ -97,7 +89,7 @@ export default function Contact() {
                 <h3 className="card-title font-display font-bold text-white mb-2">Ako to funguje?</h3>
                 <ul className="steps steps-vertical">
                   {[
-                    'Telefonický dohovor a cenová ponuka',
+                    'Zaslanie dopytu a cenová ponuka',
                     'Odsúhlasenie ponuky a dohodnutie termínu',
                     'Vykonanie obhliadky a merania',
                     'Vypracovanie protokolu a odovzdanie',
@@ -235,7 +227,7 @@ function ContactForm() {
           type="submit"
           className="btn btn-primary btn-lg mt-auto w-full rounded-2xl shadow-xl shadow-orange-900/40 hover:scale-[1.02] active:scale-100 transition-transform"
         >
-          Odoslať dopyt
+          Odoslať správu
         </button>
 
         <p className="text-base-content/25 text-xs text-center -mt-2">

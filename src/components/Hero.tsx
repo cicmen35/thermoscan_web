@@ -1,6 +1,24 @@
+import { useState, useEffect } from 'react';
 import { HERO_BG_URL } from '../data/content';
 
+const DYNAMIC_WORDS = ['budov', 'rodinných domov', 'bytov', 'novostavieb'];
+
 export default function Hero() {
+  const [wordIndex, setWordIndex] = useState(0);
+  const [isFading, setIsFading] = useState(false);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIsFading(true);
+      setTimeout(() => {
+        setWordIndex((prev) => (prev + 1) % DYNAMIC_WORDS.length);
+        setIsFading(false);
+      }, 280);
+    }, 3200);
+
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <section
       id="domov"
@@ -19,53 +37,59 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-blue-950/60 via-transparent to-transparent" />
       </div>
 
-      {/* Animated glow orbs */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse pointer-events-none" />
-      <div
-        className="absolute bottom-1/4 right-1/3 w-72 h-72 bg-accent/10 rounded-full blur-3xl pointer-events-none"
-        style={{ animation: 'pulse 3s ease-in-out 1s infinite' }}
-      />
+
+      {/* Animated floating thermal glow orbs */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-float-orb-1 pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/3 w-72 h-72 bg-accent/10 rounded-full blur-3xl animate-float-orb-2 pointer-events-none" />
 
       {/* Content */}
       <div className="hero-content relative z-10 max-w-7xl mx-auto px-6 pt-24 pb-32 sm:pt-28 sm:pb-24 flex flex-col items-center text-center gap-6">
         <div className="flex flex-col gap-6 items-center">
           {/* Badge */}
-          <div className="badge badge-outline text-primary border-primary/30 bg-primary/10 gap-2 px-4 py-3 text-sm font-medium rounded-full">
+          <div className="badge badge-outline text-primary border-primary/30 bg-primary/10 gap-2 px-4 py-3 text-sm font-medium rounded-full animate-hero-badge hover:border-primary/60 transition-colors">
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
             Odborné posúdenie stavu nehnuteľnosti
           </div>
 
-          {/* Heading */}
-          <h1 className="font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight text-white">
+          {/* Heading with dynamic word transition */}
+          <h1 className="font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight text-white animate-hero-title">
             Termovízia{' '}
-            <span className="text-gradient">budov</span>
+            <span
+              className={`inline-block text-gradient animate-gradient-pan transition-all duration-300 transform ${
+                isFading
+                  ? 'opacity-0 -translate-y-4 scale-95 blur-sm'
+                  : 'opacity-100 translate-y-0 scale-100 blur-0'
+              }`}
+            >
+              {DYNAMIC_WORDS[wordIndex]}
+            </span>
           </h1>
 
-          <p className="text-base sm:text-lg text-base-content/70 leading-relaxed max-w-2xl">
+          <p className="text-base sm:text-lg text-base-content/70 leading-relaxed max-w-2xl animate-hero-desc">
             Meranie termovíznou kamerou patrí k vysoko efektívnym nedeštruktívnym metódam merania,
             ktorým dokážeme odhaliť skryté nedostatky v obalových konštrukciách budov.
           </p>
 
           {/* CTAs */}
-          <div className="flex flex-wrap items-center justify-center gap-4 mt-2">
+          <div className="flex flex-wrap items-center justify-center gap-4 mt-2 animate-hero-cta">
             <a
               id="hero-contact-cta"
               href="#kontakt"
-              className="btn btn-primary btn-lg rounded-full shadow-xl shadow-orange-900/50 hover:scale-105 transition-transform"
+              className="btn btn-primary btn-lg rounded-full shadow-xl shadow-orange-900/50 hover:scale-105 active:scale-95 transition-all animate-button-heat"
             >
               Kontaktujte nás
             </a>
             <a
               id="hero-learn-more"
               href="#termovizia"
-              className="btn btn-ghost btn-lg rounded-full glass text-white hover:bg-white/15"
+              className="btn btn-ghost btn-lg rounded-full glass text-white hover:bg-white/15 hover:scale-105 active:scale-95 transition-all"
             >
               Zistiť viac
             </a>
           </div>
 
           {/* Quick stats */}
-          <div className="stats stats-horizontal hidden sm:flex bg-transparent border-t border-white/10 shadow-none mt-4 pt-2">
+          <div className="stats stats-horizontal hidden sm:flex bg-transparent border-t border-white/10 shadow-none mt-4 pt-2 animate-hero-stats">
             {[
               { value: '1–2h', label: 'Trvanie merania' },
               { value: '10°C', label: 'Min. rozdiel teplôt' },
