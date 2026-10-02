@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { CONTACT } from '../data/content';
+import SectionHeader from './ui/SectionHeader';
 
 export default function Contact() {
   return (
@@ -8,32 +10,26 @@ export default function Contact() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-6">
-        {/* Section header */}
-        <div className="text-center mb-16 flex flex-col items-center gap-4">
-          <div className="badge badge-outline text-success border-success/30 bg-success/10 gap-2 px-4 py-3 text-sm font-medium rounded-full">
+        <SectionHeader
+          tone="success"
+          eyebrow="Kontakt"
+          icon={(
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
               <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
             </svg>
-            Kontakt
-          </div>
-          <h2 className="font-display font-bold text-4xl md:text-5xl text-white">
-            Neváhajte nás{' '}
-            <span className="text-gradient">kontaktovať</span>
-          </h2>
-          <p className="text-base-content/60 max-w-2xl text-base leading-relaxed">
-            Na základe Vášho dopytu pre Vás pripravíme
-            cenovú ponuku. Následne po jej odsúhlasení si dohodneme termín a vykonáme obhliadku.
-            Vypracujeme protokol o termovíznom meraní, ktorý po uhradení dohodnutej ceny odovzdáme.
-          </p>
-        </div>
+          )}
+          title={<>Neváhajte nás <span className="text-gradient">kontaktovať</span></>}
+          description="Na základe Vášho dopytu pre Vás pripravíme cenovú ponuku. Následne po jej odsúhlasení si dohodneme termín a vykonáme obhliadku. Vypracujeme protokol o termovíznom meraní, ktorý po uhradení dohodnutej ceny odovzdáme."
+        />
 
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Left: Contact info + process steps */}
           <div className="flex flex-col gap-4">
             {/* Phone */}
-            <div
+            <a
               id="contact-phone"
-              className="card glass"
+              href={`tel:${CONTACT.phone.replace(/\s/g, '')}`}
+              className="card glass transition-colors hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
             >
               <div className="card-body flex-row items-center gap-3.5 sm:gap-5 p-4 sm:p-6">
                 <div className="w-11 h-11 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center text-primary shrink-0">
@@ -42,16 +38,17 @@ export default function Contact() {
                   </svg>
                 </div>
                 <div className="min-w-0 flex-1">
-                  <div className="text-base-content/40 text-xs sm:text-sm mb-0.5 sm:mb-1">Zavolajte nám</div>
+                  <div className="text-base-content/65 text-xs sm:text-sm mb-0.5 sm:mb-1">Zavolajte nám</div>
                   <div className="text-white font-semibold text-base sm:text-xl truncate">{CONTACT.phone}</div>
                 </div>
               </div>
-            </div>
+            </a>
 
             {/* Email */}
-            <div
+            <a
               id="contact-email"
-              className="card glass"
+              href={`mailto:${CONTACT.email}`}
+              className="card glass transition-colors hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
             >
               <div className="card-body flex-row items-center gap-3.5 sm:gap-5 p-4 sm:p-6">
                 <div className="w-11 h-11 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br from-info/20 to-accent/20 flex items-center justify-center text-info shrink-0">
@@ -61,11 +58,11 @@ export default function Contact() {
                   </svg>
                 </div>
                 <div className="min-w-0 flex-1">
-                  <div className="text-base-content/40 text-xs sm:text-sm mb-0.5 sm:mb-1">Napíšte nám</div>
+                  <div className="text-base-content/65 text-xs sm:text-sm mb-0.5 sm:mb-1">Napíšte nám</div>
                   <div className="text-white font-semibold text-xs xs:text-sm sm:text-lg truncate">{CONTACT.email}</div>
                 </div>
               </div>
-            </div>
+            </a>
 
             {/* Address */}
             <div className="card glass">
@@ -76,7 +73,7 @@ export default function Contact() {
                   </svg>
                 </div>
                 <div className="min-w-0 flex-1">
-                  <div className="text-base-content/40 text-xs sm:text-sm mb-0.5 sm:mb-1">Nájdete nás</div>
+                  <div className="text-base-content/65 text-xs sm:text-sm mb-0.5 sm:mb-1">Nájdete nás</div>
                   <div className="text-white font-semibold text-sm sm:text-base truncate">{CONTACT.address}</div>
                   <div className="text-base-content/60 text-xs sm:text-sm truncate">{CONTACT.city}, {CONTACT.country}</div>
                 </div>
@@ -116,82 +113,111 @@ export default function Contact() {
 // ─── Form ────────────────────────────────────────────────────────────────────
 
 function ContactForm() {
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [message, setMessage] = useState('');
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
-    const body =
-      `Meno: ${data.get('firstName')} ${data.get('lastName')}\n` +
-      `Email: ${data.get('email')}\n` +
-      `Telefón: ${data.get('phone') || '—'}\n` +
-      `Typ objektu: ${data.get('propertyType')}\n` +
-      `Lokalita: ${data.get('location')}\n\n` +
-      `Správa:\n${data.get('message') || '—'}`;
-    window.location.href =
-      `mailto:${CONTACT.email}` +
-      `?subject=${encodeURIComponent('Dopyt – ' + data.get('propertyType'))}` +
-      `&body=${encodeURIComponent(body)}`;
+    const form = e.currentTarget;
+
+    if (!form.reportValidity()) return;
+
+    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+    if (!accessKey) {
+      setStatus('error');
+      setMessage('Formulár momentálne nie je nakonfigurovaný. Kontaktujte nás e-mailom alebo telefonicky.');
+      return;
+    }
+
+    const data = new FormData(form);
+    const propertyType = data.get('propertyType');
+    data.set('access_key', accessKey);
+    data.set('subject', `Dopyt – ${typeof propertyType === 'string' ? propertyType : 'Neurčený objekt'}`);
+    data.set('from_name', 'ThermoScan web');
+
+    setStatus('submitting');
+    setMessage('');
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: data,
+      });
+      const result = (await response.json()) as { success?: boolean; message?: string };
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message ?? 'Request failed');
+      }
+
+      form.reset();
+      setStatus('success');
+      setMessage('Ďakujeme. Váš dopyt bol úspešne odoslaný.');
+    } catch {
+      setStatus('error');
+      setMessage('Správu sa nepodarilo odoslať. Skúste to znova alebo nás kontaktujte priamo.');
+    }
   }
 
-  const fieldset = 'fieldset';
-  const legend = 'fieldset-legend text-base-content/50 text-xs uppercase tracking-wide';
+  const field = 'flex flex-col gap-1.5';
+  const label = 'text-base-content/70 text-xs font-semibold uppercase tracking-wide';
+  const input = 'input input-bordered w-full bg-white/5 border-white/15 text-white placeholder:text-white/40 focus:border-primary/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60';
 
   return (
     <form
       id="contact-form"
       onSubmit={handleSubmit}
-      noValidate
       className="card glass h-full"
     >
       <div className="card-body gap-4 p-8">
         <h3 className="card-title font-display font-bold text-2xl text-white mb-1">Získajte cenovú ponuku</h3>
 
         {/* First + last name */}
-        <div className="grid grid-cols-2 gap-4">
-          <div className={fieldset}>
-            <legend className={legend}>Meno *</legend>
+        <div className="grid sm:grid-cols-2 gap-4">
+          <div className={field}>
+            <label className={label} htmlFor="firstName">Meno *</label>
             <input
               id="firstName" name="firstName" type="text" required minLength={2}
               autoComplete="given-name" placeholder="Ján"
-              className="input input-bordered w-full bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-primary/60"
+              className={input}
             />
           </div>
-          <div className={fieldset}>
-            <legend className={legend}>Priezvisko *</legend>
+          <div className={field}>
+            <label className={label} htmlFor="lastName">Priezvisko *</label>
             <input
               id="lastName" name="lastName" type="text" required minLength={2}
               autoComplete="family-name" placeholder="Novák"
-              className="input input-bordered w-full bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-primary/60"
+              className={input}
             />
           </div>
         </div>
 
         {/* Email */}
-        <div className={fieldset}>
-          <legend className={legend}>E-mail *</legend>
+        <div className={field}>
+          <label className={label} htmlFor="contactEmail">E-mail *</label>
           <input
             id="contactEmail" name="email" type="email" required
             autoComplete="email" placeholder="jan.novak@email.sk"
-            className="input input-bordered w-full bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-primary/60"
+            className={input}
           />
         </div>
 
         {/* Phone */}
-        <div className={fieldset}>
-          <legend className={legend}>Telefón</legend>
+        <div className={field}>
+          <label className={label} htmlFor="contactPhone">Telefón</label>
           <input
             id="contactPhone" name="phone" type="tel"
             autoComplete="tel" placeholder="+421 9XX XXX XXX"
-            className="input input-bordered w-full bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-primary/60"
+            className={input}
           />
         </div>
 
         {/* Property type + location */}
-        <div className="grid grid-cols-2 gap-4">
-          <div className={fieldset}>
-            <legend className={legend}>Typ objektu *</legend>
+        <div className="grid sm:grid-cols-2 gap-4">
+          <div className={field}>
+            <label className={label} htmlFor="propertyType">Typ objektu *</label>
             <select
               id="propertyType" name="propertyType" required defaultValue=""
-              className="select select-bordered w-full bg-white/5 border-white/10 text-white appearance-none cursor-pointer"
+              className="select select-bordered w-full bg-white/5 border-white/15 text-white appearance-none cursor-pointer focus:border-primary/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
             >
               <option value="" disabled>Vybrať…</option>
               <option>Rodinný dom</option>
@@ -202,37 +228,57 @@ function ContactForm() {
               <option>Iné</option>
             </select>
           </div>
-          <div className={fieldset}>
-            <legend className={legend}>Lokalita *</legend>
+          <div className={field}>
+            <label className={label} htmlFor="location">Lokalita *</label>
             <input
               id="location" name="location" type="text" required
               placeholder="Nitra, Bratislava…"
-              className="input input-bordered w-full bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-primary/60"
+              className={input}
             />
           </div>
         </div>
 
         {/* Message */}
-        <div className={fieldset}>
-          <legend className={legend}>Správa</legend>
+        <div className={field}>
+          <label className={label} htmlFor="message">Správa</label>
           <textarea
             id="message" name="message" rows={3}
             placeholder="Veľkosť objektu, ďalšie informácie…"
-            className="textarea textarea-bordered w-full bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-primary/60 resize-none"
+            className="textarea textarea-bordered w-full bg-white/5 border-white/15 text-white placeholder:text-white/40 focus:border-primary/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 resize-none"
           />
         </div>
+
+        <label className="hidden">
+          Nevyplňujte toto pole
+          <input type="checkbox" name="botcheck" tabIndex={-1} autoComplete="off" />
+        </label>
 
         <button
           id="contact-form-submit"
           type="submit"
+          disabled={status === 'submitting'}
           className="btn btn-primary btn-lg mt-auto w-full rounded-2xl shadow-xl shadow-orange-900/40 hover:scale-[1.02] active:scale-100 transition-transform"
         >
-          Odoslať správu
+          {status === 'submitting' ? (
+            <>
+              <span className="loading loading-spinner loading-sm" aria-hidden="true" />
+              Odosielam…
+            </>
+          ) : 'Odoslať správu'}
         </button>
 
-        <p className="text-base-content/25 text-xs text-center -mt-2">
-          * Povinné polia. Formulár otvorí váš e-mailový klient.
+        <p className="text-base-content/60 text-xs text-center -mt-2">
+          * Povinné polia. Údaje použijeme iba na vybavenie vášho dopytu.
         </p>
+        <div
+          role={status === 'error' ? 'alert' : 'status'}
+          aria-live="polite"
+          className={`min-h-5 text-sm text-center ${
+            status === 'success' ? 'text-success' : status === 'error' ? 'text-error' : ''
+          }`}
+        >
+          {message}
+        </div>
       </div>
     </form>
   );

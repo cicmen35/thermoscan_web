@@ -1,20 +1,6 @@
 import { SERVICES } from '../data/content';
-
-const serviceIcons = [
-  // House check icon
-  <svg key="house" className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955a1.126 1.126 0 011.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-  </svg>,
-  // Thermometer icon
-  <svg key="therm" className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z" />
-    <path strokeLinecap="round" strokeLinejoin="round" d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1A3.75 3.75 0 0012 18z" />
-  </svg>,
-  // Shield icon
-  <svg key="shield" className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
-  </svg>,
-];
+import { FeatureIcon } from './icons';
+import SectionHeader from './ui/SectionHeader';
 
 export default function Services() {
   return (
@@ -24,28 +10,20 @@ export default function Services() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-transparent via-primary/40 to-transparent" />
 
       <div className="relative max-w-7xl mx-auto px-6">
-        {/* Section header */}
-        <div className="text-center mb-16 flex flex-col items-center gap-4">
-          <div className="badge badge-outline text-primary border-primary/30 bg-primary/10 gap-2 px-4 py-3 text-sm font-medium rounded-full">
+        <SectionHeader
+          eyebrow="Naše služby"
+          icon={(
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
             </svg>
-            Naše služby
-          </div>
-          <h2 className="font-display font-bold text-4xl md:text-5xl text-white">
-            Termovízia a jej{' '}
-            <span className="text-gradient">využitie</span>
-          </h2>
-          <p className="text-base-content/60 max-w-2xl text-lg leading-relaxed">
-            Meranie termovíznou kamerou patrí k vysoko efektívnym nedeštruktívnym metódam merania,
-            ktorým dokážeme odhaliť skryté nedostatky v obalových konštrukciách budov a ich
-            častí.
-          </p>
-        </div>
+          )}
+          title={<>Termovízia a jej <span className="text-gradient">využitie</span></>}
+          description="Meranie termovíznou kamerou patrí k vysoko efektívnym nedeštruktívnym metódam merania, ktorým dokážeme odhaliť skryté nedostatky v obalových konštrukciách budov a ich častí."
+        />
 
         {/* Service cards */}
         <div className="grid md:grid-cols-3 gap-6 mb-20">
-          {SERVICES.map((service, i) => (
+          {SERVICES.map((service) => (
             <div
               key={service.id}
               id={`service-${service.id}`}
@@ -57,7 +35,7 @@ export default function Services() {
               <div className="card-body gap-5">
                 {/* Icon */}
                 <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center text-primary group-hover:from-primary/30 group-hover:to-secondary/30 transition-all duration-300">
-                  {serviceIcons[i]}
+                  <FeatureIcon name={service.icon} className="w-8 h-8" />
                 </div>
 
                 <h3 className="card-title font-display font-bold text-xl text-white">{service.title}</h3>

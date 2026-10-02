@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { FAQ } from '../data/content';
+import SectionHeader from './ui/SectionHeader';
 
 function FaqItem({ question, answer, index }: { question: string; answer: string; index: number }) {
   const [open, setOpen] = useState(false);
@@ -40,20 +41,18 @@ export default function FaqSection() {
       <div className="absolute right-0 top-1/2 -translate-y-1/2 w-80 h-80 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative max-w-4xl mx-auto px-6">
-        <div className="text-center mb-14 flex flex-col items-center gap-4">
-          <div className="badge badge-outline text-base-content/60 border-white/20 bg-white/5 gap-2 px-4 py-3 text-sm font-medium rounded-full">
+        <SectionHeader
+          tone="neutral"
+          eyebrow="Časté otázky"
+          icon={(
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
             </svg>
-            Časté otázky
-          </div>
-          <h2 className="font-display font-bold text-4xl md:text-5xl text-white">
-            Máte <span className="text-gradient">otázky?</span>
-          </h2>
-          <p className="text-base-content/60 max-w-xl text-base">
-            Odpovede na najčastejšie otázky o termovíznom meraní.
-          </p>
-        </div>
+          )}
+          title={<>Máte <span className="text-gradient">otázky?</span></>}
+          description="Odpovede na najčastejšie otázky o termovíznom meraní."
+          maxWidth="max-w-xl"
+        />
 
         <div className="flex flex-col gap-3">
           {FAQ.map((item, i) => (

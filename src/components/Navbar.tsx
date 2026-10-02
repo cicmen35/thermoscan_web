@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { NAV_LINKS, CONTACT, LOGO_URL } from '../data/content';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     let lastY = window.scrollY;
@@ -18,8 +20,31 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const closeMenu = (restoreFocus = false) => {
+      setMenuOpen(false);
+      if (restoreFocus) requestAnimationFrame(() => menuButtonRef.current?.focus());
+    };
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') closeMenu(true);
+    };
+    const onPointerDown = (event: PointerEvent) => {
+      if (!headerRef.current?.contains(event.target as Node)) closeMenu();
+    };
+
+    document.addEventListener('keydown', onKeyDown);
+    document.addEventListener('pointerdown', onPointerDown);
+    return () => {
+      document.removeEventListener('keydown', onKeyDown);
+      document.removeEventListener('pointerdown', onPointerDown);
+    };
+  }, [menuOpen]);
+
   return (
     <header
+      ref={headerRef}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         hidden ? '-translate-y-full' : 'translate-y-0'
       } ${
@@ -29,7 +54,7 @@ export default function Navbar() {
       <div className="navbar max-w-7xl mx-auto px-6">
         {/* Logo */}
         <div className="navbar-start">
-          <a href="/" className="flex items-center gap-2">
+          <a href="#domov" aria-label="ThermoScan – domov" className="flex items-center gap-2 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary rounded">
             <img
               src={LOGO_URL}
               alt="ThermoScan Logo"
@@ -70,10 +95,14 @@ export default function Navbar() {
 
           {/* Mobile hamburger */}
           <button
+            ref={menuButtonRef}
+            type="button"
             id="mobile-menu-toggle"
             className="btn btn-ghost btn-sm md:hidden"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle navigation menu"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-navigation"
           >
             <div className="w-5 flex flex-col gap-1 transition-all">
               <span className={`block h-0.5 bg-white transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-1.5' : ''}`} />
@@ -86,7 +115,9 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       <div
-        className={`md:hidden overflow-hidden transition-all duration-300 ${menuOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'}`}
+        id="mobile-navigation"
+        hidden={!menuOpen}
+        className="md:hidden"
       >
         <ul className="menu menu-vertical glass-dark mx-4 mt-2 rounded-2xl p-2 gap-1">
           {NAV_LINKS.map((link) => (

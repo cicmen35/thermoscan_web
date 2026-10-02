@@ -6,18 +6,38 @@ const DYNAMIC_WORDS = ['budov', 'rodinných domov', 'bytov', 'novostavieb'];
 export default function Hero() {
   const [wordIndex, setWordIndex] = useState(0);
   const [isFading, setIsFading] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(
+    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+  );
 
   useEffect(() => {
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const onChange = () => setReducedMotion(media.matches);
+    media.addEventListener('change', onChange);
+    return () => media.removeEventListener('change', onChange);
+  }, []);
+
+  useEffect(() => {
+    if (reducedMotion) {
+      setWordIndex(0);
+      setIsFading(false);
+      return;
+    }
+
+    let fadeTimer: ReturnType<typeof setTimeout> | undefined;
     const timer = setInterval(() => {
       setIsFading(true);
-      setTimeout(() => {
+      fadeTimer = setTimeout(() => {
         setWordIndex((prev) => (prev + 1) % DYNAMIC_WORDS.length);
         setIsFading(false);
       }, 280);
     }, 3200);
 
-    return () => clearInterval(timer);
-  }, []);
+    return () => {
+      clearInterval(timer);
+      if (fadeTimer) clearTimeout(fadeTimer);
+    };
+  }, [reducedMotion]);
 
   return (
     <section
@@ -53,22 +73,18 @@ export default function Hero() {
 
           {/* Heading with dynamic word transition */}
           <h1 className="font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight text-white animate-hero-title">
-            Termovízia{' '}
+            <span className="sr-only">Termovízia budov</span>
             <span
+              aria-hidden="true"
               className={`inline-block text-gradient animate-gradient-pan transition-all duration-300 transform ${
                 isFading
                   ? 'opacity-0 -translate-y-4 scale-95 blur-sm'
                   : 'opacity-100 translate-y-0 scale-100 blur-0'
               }`}
             >
-              {DYNAMIC_WORDS[wordIndex]}
+              Termovízia {DYNAMIC_WORDS[wordIndex]}
             </span>
           </h1>
-
-          <p className="text-base sm:text-lg text-base-content/70 leading-relaxed max-w-2xl animate-hero-desc">
-            Meranie termovíznou kamerou patrí k vysoko efektívnym nedeštruktívnym metódam merania,
-            ktorým dokážeme odhaliť skryté nedostatky v obalových konštrukciách budov.
-          </p>
 
           {/* CTAs */}
           <div className="flex flex-wrap items-center justify-center gap-4 mt-2 animate-hero-cta">

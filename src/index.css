@@ -61,6 +61,11 @@
   --color-thermal-orange: oklch(72% 0.22 45);
   --color-thermal-red: oklch(60% 0.22 25);
   --color-thermal-warm: oklch(75% 0.18 60);
+  --color-surface-glass: oklch(100% 0 0 / 5%);
+  --color-surface-glass-strong: oklch(0% 0 0 / 25%);
+  --color-border-subtle: oklch(100% 0 0 / 12%);
+  --color-text-muted: oklch(72% 0.02 230);
+  --color-focus-ring: oklch(72% 0.22 45);
 }
 
 @layer base {
@@ -83,18 +88,27 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
   }
+
+  p {
+    font-family: var(--font-display);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 3px;
+  }
 }
 
 @layer utilities {
   .glass {
-    background: oklch(100% 0 0 / 5%);
+    background: var(--color-surface-glass);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid oklch(100% 0 0 / 12%);
+    border: 1px solid var(--color-border-subtle);
   }
 
   .glass-dark {
-    background: oklch(0% 0 0 / 25%);
+    background: var(--color-surface-glass-strong);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid oklch(100% 0 0 / 8%);

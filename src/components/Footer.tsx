@@ -16,7 +16,7 @@ export default function Footer() {
               alt="ThermoScan Logo"
               className="h-10 w-auto object-contain drop-shadow-md opacity-90"
             />
-            <p className="text-base-content/40 text-sm leading-relaxed max-w-xs">
+            <p className="text-base-content/65 text-sm leading-relaxed max-w-xs">
               Profesionálne termovízne merania budov pre rodinné domy, bytové domy, kancelárske
               priestory aj nové stavby.
             </p>
@@ -58,7 +58,7 @@ export default function Footer() {
               >
                 {CONTACT.email}
               </a>
-              <span className="text-base-content/40">
+              <span className="text-base-content/65">
                 {CONTACT.address}, {CONTACT.city}
               </span>
             </div>
@@ -85,13 +85,13 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="divider opacity-10 my-0" />
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <p className="text-base-content/30 text-xs">
+          <p className="text-base-content/60 text-xs">
             Copyright © {year} | thermoscan.sk
           </p>
           <button
             id="back-to-top"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="btn btn-ghost btn-xs text-base-content/30 hover:text-base-content/70"
+            className="btn btn-ghost btn-xs text-base-content/60 hover:text-base-content/80"
           >
             Návrat hore
             <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
